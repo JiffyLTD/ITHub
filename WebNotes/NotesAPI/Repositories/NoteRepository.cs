@@ -80,6 +80,7 @@ namespace NotesAPI.Repositories
                 oldNote.Title = note.Title;
                 oldNote.Description = note.Description;
                 oldNote.NoteDate = note.NoteDate;
+                oldNote.ImageFileName = note.ImageFileName;
 
                 await _context.SaveChangesAsync();
 

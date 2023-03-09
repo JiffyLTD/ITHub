@@ -19,16 +19,19 @@ const Note = ({ note, modalServerResponse, setMessage, setNote, setIsUpdateModal
   return (
     <div className="container p-0">
       <Row>
+        <Col className="border-end text-center" sm="2">
+          <img width='100' height='100' src={"https://localhost:7190/Images/" + note.imageFileName} alt='Не удалось загрузить изображение'/>
+        </Col>
         <Col
           className="d-flex flex-column align-items-center border-end"
           sm="2"
         >
-          <h5 className="ms-3">
+          <h5 className="">
             {note.title}
           </h5>
           <small>От {note.noteDate}</small>
         </Col>
-        <Col className="border-end" sm="8">
+        <Col className="border-end" sm="6">
           <p className="text-break">{note.description}</p>
         </Col>
         <Col

@@ -16,7 +16,8 @@ namespace NotesAPI.Data
                 {
                     Title = "НЕ ЗАБЫТЬ",
                     Description = "Сделать тестовое задание :)",
-                    NoteDate = DateTime.Now.ToString()
+                    NoteDate = DateTime.Now.ToString(),
+                    ImageFileName = "default.png"
                 };
                 Notes.Add(defaultNote);
                 SaveChanges();

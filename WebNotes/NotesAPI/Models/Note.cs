@@ -9,5 +9,6 @@ namespace NotesAPI.Models
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public string NoteDate { get; set; } = null!;
+        public string ImageFileName { get; set; } = null!;
     }
 }

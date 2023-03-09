@@ -28,4 +28,10 @@ export default class NoteService {
 
     return response;
   }
+
+  static async saveFile(formData){
+    const response = await axios.post("https://localhost:7190/api/Note/saveImage",formData);
+
+    return response;
+  }
 }

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using NotesAPI.Data;
 using NotesAPI.Repositories;
 using NotesAPI.Repositories.Interfaces;
@@ -31,5 +32,12 @@ app.MapControllers();
 
 // Add CORS
 app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
+// use static files for images
+app.UseStaticFiles(new StaticFileOptions
+{ FileProvider = new PhysicalFileProvider(
+    Path.Combine(Directory.GetCurrentDirectory(), "Images")),
+  RequestPath =  "/Images"  
+});
 
 app.Run();

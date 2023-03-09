@@ -10,10 +10,44 @@ namespace NotesAPI.Controllers
     public class NoteController : ControllerBase
     {
         private readonly INote _note;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public NoteController(INote note)
+        public NoteController(INote note, IWebHostEnvironment webHostEnvironment)
         {
             _note = note;
+            _webHostEnvironment = webHostEnvironment;
+        }
+
+        [HttpGet]
+        [Route("getImage")]
+        public async Task ShowImage(string fileName, HttpContext context)
+        {
+            var path = "Images/" + fileName;
+            await context.Response.SendFileAsync(path);
+        }
+
+        [HttpPost]
+        [Route("saveImage")]
+        public async Task<IResult> SaveFile()
+        {
+            try
+            {
+                var httpRequest = Request.Form;
+                var postedFile = httpRequest.Files[0];
+                string fileName = postedFile.FileName;
+                var phisicalPath = _webHostEnvironment.ContentRootPath + "/Images/" + fileName;
+
+                using(var stream = new FileStream(phisicalPath, FileMode.Create))
+                {
+                    await postedFile.CopyToAsync(stream);
+                }
+
+                return Results.Ok("Изображение успешно загружено");
+            }
+            catch (Exception)
+            {
+                return Results.BadRequest("Не удалось загрузить изображение.");
+            }
         }
 
         [HttpGet]

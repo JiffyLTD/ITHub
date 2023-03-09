@@ -14,10 +14,22 @@ const UpdateModal = ({
 }) => {
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadResult, setUploadResult] = useState('');
 
-  const closeUpdateModal = () => {
-    setIsShow(false);
-  };
+  useEffect(() => {
+    const uploadImage = async () => {
+      if(selectedFile !== null){
+        const formData = new FormData();
+        formData.append('image',selectedFile);
+        const result = await NoteService.saveFile(formData);
+        setUploadResult(result.data);
+        }
+    }
+    uploadImage();
+  },[selectedFile])
+
+  const closeUpdateModal = () => setIsShow(false);
 
   useEffect(() => {
     if (isShow) {
@@ -32,6 +44,7 @@ const UpdateModal = ({
       title: newTitle,
       description: newDescription,
       noteDate: new Date(Date.now()).toLocaleString(),
+      imageFileName : selectedFile.name
     };
 
     let result = await NoteService.updateNote(updatedNote);
@@ -62,6 +75,19 @@ const UpdateModal = ({
           onChange={(event) => setNewDescription(event.target.value)}
           value={newDescription}
         />
+        <div className="mb-3">
+          <label htmlFor="formFile" className="form-label ms-3">
+            Изображение
+          </label>
+          <input
+            className="form-control"
+            type="file"
+            id="formFile"
+            accept="image/*, .png, .jpg"
+            onChange={(event) => setSelectedFile(event.target.files[0])}
+          />
+          <span className="text-dark">{uploadResult}</span>
+        </div>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={updateNote}>

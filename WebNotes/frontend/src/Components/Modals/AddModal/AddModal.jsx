@@ -18,7 +18,7 @@ const AddModal = ({ isShow, setIsShow, modalServerResponse, setMessage }) => {
   };
 
   const addNewNote = async () => {
-    let newNote = { title: title, description: description, noteDate: new Date(Date.now()).toLocaleString() };
+    let newNote = { title: title, description: description, noteDate: new Date(Date.now()).toLocaleString(), imageFileName : 'default.png' };
     let result = await NoteService.addNote(newNote);
 
     setMessage(result.data);
