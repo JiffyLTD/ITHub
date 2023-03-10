@@ -20,7 +20,7 @@ const Note = ({ note, modalServerResponse, setMessage, setNote, setIsUpdateModal
     <div className="container p-0">
       <Row>
         <Col className="border-end text-center" sm="2">
-          <img width='100' height='100' src={"https://localhost:7190/Images/" + note.imageFileName} alt='Не удалось загрузить изображение'/>
+          <img width='150' height='100' src={"https://localhost:7190/Images/" + note.imageFileName} alt='Не удалось загрузить изображение'/>
         </Col>
         <Col
           className="d-flex flex-column align-items-center border-end"
