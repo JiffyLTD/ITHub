@@ -18,14 +18,6 @@ namespace NotesAPI.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        [HttpGet]
-        [Route("getImage")]
-        public async Task ShowImage(string fileName, HttpContext context)
-        {
-            var path = "Images/" + fileName;
-            await context.Response.SendFileAsync(path);
-        }
-
         [HttpPost]
         [Route("saveImage")]
         public async Task<IResult> SaveFile()
